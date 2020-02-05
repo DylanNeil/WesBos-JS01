@@ -7,7 +7,6 @@
 </head>
 <body>
 
-
   <div class="keys">
     <div data-key="65" class="key">
       <kbd>A</kbd>
@@ -66,10 +65,15 @@ window.addEventListener('keydown', function (e){
   if(!key) return;
   key.classList.add('playing');
   audio.play();
-  window.addEventListener('keyup', function (e){
-   key.classList.remove('playing');
-  });
 });
+
+function removeTransition(e) {
+  if (e.propertyName !== 'transform') return;
+  this.classList.remove('playing'); 
+}
+
+const keys = document.querySelectorAll('.key');
+keys.forEach(key => key.addEventListener('transitionend', removeTransition));
 </script>
 
 
